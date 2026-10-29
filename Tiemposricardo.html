@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalefon - Página en Proceso</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dalefon: '#3C1053',
+            'dalefon-cyan': '#00E5FF'
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'drive': 'drive 3s ease-in-out infinite alternate',
+            'hammer': 'hammer 0.4s ease-in-out infinite alternate',
+            'scoop': 'scoop 3s ease-in-out infinite alternate',
+            'wheel': 'wheel 3s linear infinite alternate',
+            'float': 'float 2s ease-in-out infinite alternate'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            drive: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-40px)' }
+            },
+            scoop: {
+              '0%': { transform: 'rotate(0deg)' },
+              '30%': { transform: 'rotate(0deg)' },
+              '80%': { transform: 'rotate(-45deg)' },
+              '100%': { transform: 'rotate(-45deg)' }
+            },
+            hammer: {
+              '0%': { transform: 'rotate(-20deg)' },
+              '100%': { transform: 'rotate(60deg)' }
+            },
+            wheel: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
+            },
+            float: {
+              '0%': { transform: 'translateY(0px)' },
+              '100%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-[#FDFDFF] dark:bg-slate-900 transition-colors duration-300 overflow-x-hidden">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const IconSvg = ({ children, className = "w-5 h-5", size, strokeWidth = "2", ...props }) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        width={size || "24"}
+        height={size || "24"}
+        {...props}
+      >
+        {children}
+      </svg>
+    );
+
+    const Moon = (props) => <IconSvg {...props}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></IconSvg>;
+    const Sun = (props) => <IconSvg {...props}><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></IconSvg>;
+    const ArrowLeft = (props) => <IconSvg {...props}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></IconSvg>;
+
+    function App() {
+      const [isDarkMode, setIsDarkMode] = useState(false);
+
+      return (
+        <div className={`${isDarkMode ? 'dark' : ''}`}>
+          <div className="min-h-screen flex flex-col bg-[#FDFDFF] dark:bg-slate-900 font-sans selection:bg-cyan-100 selection:text-[#3C1053] transition-colors duration-300">
+            
+            {/* Navbar original mantenido */}
+            <nav className="bg-[#3C1053] dark:bg-slate-950 py-6 px-8 sticky top-0 z-50 shadow-2xl transition-colors w-full">
+              <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
+                <div className="flex items-center space-x-4 md:space-x-8">
+                  {/* Botón de Regresar */}
+                  <a href="https://dalefonformulario.github.io/DashboardHeidi-/" className="text-white hover:text-[#00E5FF] transition-all flex items-center space-x-2 group bg-white/10 px-3 py-2 rounded-lg hover:bg-white/20">
+                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                    <span className="font-bold text-sm uppercase tracking-wider hidden sm:inline">Regresar</span>
+                  </a>
+                  
+                  <div className="flex flex-col">
+                    <span className="text-white text-4xl font-bold lowercase tracking-tighter leading-none">
+                      dalefon<span className="text-[12px] relative -top-3 font-black">®</span>
+                    </span>
+                    <span className="text-cyan-400 text-[10px] font-bold tracking-[0.25em] uppercase mt-1.5 ml-1">
+                      la telefonía morada
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                  className="text-white p-2 rounded-full hover:bg-white/20 transition-all focus:outline-none"
+                >
+                  {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+                </button>
+              </div>
+            </nav>
+
+            {/* Contenido Principal */}
+            <main className="flex-1 flex flex-col items-center justify-center p-6 animate-fade-in w-full">
+              
+              {/* Mensaje de Construcción */}
+              <div className="text-center mb-10 mt-8">
+                <h1 className="text-5xl md:text-7xl font-black text-[#3C1053] dark:text-white tracking-tighter mb-4">
+                  PÁGINA EN <span className="text-[#00E5FF] inline-block animate-float">PROCESO</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-semibold max-w-2xl mx-auto">
+                  Estamos construyendo algo increíble. Vuelve pronto para descubrir las novedades.
+                </p>
+              </div>
+
+              {/* Ilustración Animada (SVG Puro) */}
+              <div className="w-full max-w-4xl h-64 md:h-96 relative flex justify-center items-end">
+                <svg viewBox="0 0 1000 400" className="w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMax meet">
+                  
+                  {/* Cielo / Fondo (Opcional, sin relleno para mantener limpieza) */}
+                  <g className="dark:opacity-20 opacity-10">
+                    <circle cx="200" cy="80" r="30" fill="#3C1053" />
+                    <rect x="100" y="80" width="60" height="20" rx="10" fill="#3C1053" />
+                    <rect x="120" y="60" width="50" height="20" rx="10" fill="#3C1053" />
+                  </g>
+
+                  {/* Piso */}
+                  <rect x="0" y="350" width="1000" height="50" className="fill-[#3C1053] dark:fill-slate-800 transition-colors" />
+                  <rect x="0" y="340" width="1000" height="10" className="fill-[#00E5FF] opacity-80" />
+
+                  {/* Persona 1: Martillando (Izquierda) */}
+                  <g transform="translate(30, 210)">
+                    {/* Cuerpo */}
+                    <rect x="15" y="30" width="30" height="50" rx="10" fill="#00E5FF" />
+                    {/* Piernas */}
+                    <rect x="15" y="70" width="10" height="60" fill="#3C1053" />
+                    <rect x="35" y="70" width="10" height="60" fill="#3C1053" />
+                    {/* Cabeza */}
+                    <circle cx="30" cy="15" r="15" fill="#fcd34d" />
+                    {/* Casco */}
+                    <path d="M 12 15 A 15 15 0 0 1 48 15 Z" fill="#f59e0b" />
+                    {/* Brazo Estático */}
+                    <rect x="35" y="35" width="10" height="30" rx="5" fill="#00E5FF" transform="rotate(-20 40 40)" />
+                    {/* Brazo Animado con Martillo */}
+                    <g className="animate-hammer" style={{ transformOrigin: '20px 40px' }}>
+                      <rect x="10" y="35" width="40" height="10" rx="5" fill="#0ea5e9" />
+                      {/* Martillo */}
+                      <rect x="40" y="15" width="6" height="30" fill="#78350f" />
+                      <rect x="35" y="15" width="20" height="12" rx="2" fill="#94a3b8" />
+                    </g>
+                  </g>
+
+                  {/* Persona 2: Sosteniendo plano */}
+                  <g transform="translate(150, 220)">
+                    {/* Piernas */}
+                    <rect x="10" y="60" width="12" height="60" fill="#3C1053" />
+                    <rect x="38" y="60" width="12" height="60" fill="#3C1053" />
+                    {/* Cuerpo */}
+                    <rect x="10" y="20" width="40" height="50" rx="8" fill="#c026d3" />
+                    {/* Chaleco reflectante */}
+                    <path d="M 15 20 L 25 50 L 35 20 Z" fill="#facc15" />
+                    {/* Cabeza */}
+                    <circle cx="30" cy="5" r="14" fill="#fcd34d" />
+                    {/* Casco */}
+                    <path d="M 14 5 A 14 14 0 0 1 46 5 Z" fill="#f59e0b" />
+                    {/* Plano */}
+                    <rect x="-10" y="35" width="50" height="35" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" transform="rotate(-10)" />
+                    <line x1="-5" y1="45" x2="30" y2="45" stroke="#0284c7" strokeWidth="2" transform="rotate(-10)" />
+                    <line x1="-5" y1="55" x2="20" y2="55" stroke="#0284c7" strokeWidth="2" transform="rotate(-10)" />
+                    {/* Brazos sosteniendo plano */}
+                    <rect x="5" y="25" width="10" height="30" rx="5" fill="#c026d3" transform="rotate(30 10 25)" />
+                    <rect x="45" y="25" width="10" height="30" rx="5" fill="#c026d3" transform="rotate(-40 45 25)" />
+                  </g>
+
+                  {/* Material de Construcción (Montículo de Tierra / Escombros) */}
+                  <g transform="translate(280, 260)">
+                    <path d="M 0 80 Q 50 0 100 80 Z" fill="#8B4513" />
+                    <path d="M -30 80 Q 30 20 80 80 Z" fill="#A0522D" />
+                    {/* Piedras */}
+                    <circle cx="20" cy="70" r="5" fill="#78716c" />
+                    <circle cx="70" cy="65" r="8" fill="#57534e" />
+                    <circle cx="40" cy="50" r="6" fill="#78716c" />
+                  </g>
+
+                  {/* Tractocamión / Retroexcavadora (En el piso, mirando a la izq) */}
+                  <g className="animate-drive" transform="translate(470, 175)">
+                    {/* Cabina */}
+                    <rect x="70" y="40" width="80" height="70" rx="10" fill="#facc15" />
+                    <rect x="80" y="50" width="40" height="30" rx="5" fill="#e0f2fe" /> {/* Ventana */}
+                    <circle cx="100" cy="65" r="8" fill="#3C1053" /> {/* Operador (Cabeza) */}
+                    
+                    {/* Cuerpo Principal */}
+                    <rect x="10" y="80" width="140" height="50" rx="10" fill="#eab308" />
+                    
+                    {/* Escape */}
+                    <rect x="120" y="20" width="10" height="30" fill="#94a3b8" />
+                    <circle cx="125" cy="15" r="8" fill="#cbd5e1" className="animate-float" />
+                    <circle cx="125" cy="-5" r="12" fill="#cbd5e1" className="animate-float opacity-50" style={{ animationDelay: '0.5s' }} />
+
+                    {/* Brazo y Pala (Scoop Animado) */}
+                    <g transform="translate(10, 100)">
+                      <g className="animate-scoop" style={{ transformOrigin: '40px 10px' }}>
+                        {/* Brazo */}
+                        <rect x="-80" y="-10" width="120" height="15" rx="5" fill="#3C1053" />
+                        {/* Pala */}
+                        <path d="M -100 -30 L -70 -30 L -60 10 L -100 10 Z" fill="#94a3b8" />
+                        <path d="M -105 -20 L -100 -20 L -100 10 L -105 10 Z" fill="#64748b" /> {/* Dientes */}
+                      </g>
+                    </g>
+
+                    {/* Llantas con rotación */}
+                    <g transform="translate(40, 140)">
+                      <g className="animate-wheel" style={{ transformOrigin: '0 0' }}>
+                        <circle cx="0" cy="0" r="25" fill="#1e293b" />
+                        <circle cx="0" cy="0" r="15" fill="#475569" />
+                        <circle cx="0" cy="0" r="5" fill="#cbd5e1" />
+                      </g>
+                    </g>
+                    <g transform="translate(120, 140)">
+                      <g className="animate-wheel" style={{ transformOrigin: '0 0' }}>
+                        <circle cx="0" cy="0" r="25" fill="#1e293b" />
+                        <circle cx="0" cy="0" r="15" fill="#475569" />
+                        <circle cx="0" cy="0" r="5" fill="#cbd5e1" />
+                      </g>
+                    </g>
+                  </g>
+
+                  {/* Edificio en Obra Negra (Derecha) */}
+                  <g transform="translate(680, 50)">
+                    {/* Grúa Torre */}
+                    <rect x="120" y="0" width="12" height="100" fill="#facc15" />
+                    <rect x="10" y="20" width="180" height="12" fill="#facc15" />
+                    <line x1="120" y1="0" x2="10" y2="20" stroke="#ca8a04" strokeWidth="2" />
+                    <line x1="132" y1="0" x2="190" y2="20" stroke="#ca8a04" strokeWidth="2" />
+                    <rect x="170" y="15" width="20" height="25" fill="#3C1053" /> {/* Contrapeso */}
+                    
+                    {/* Cable y viga colgando */}
+                    <line x1="40" y1="32" x2="40" y2="120" stroke="#475569" strokeWidth="2" strokeDasharray="4" className="animate-float" />
+                    <rect x="10" y="120" width="60" height="10" fill="#00E5FF" className="animate-float" />
+                    <circle cx="40" cy="120" r="4" fill="#3C1053" className="animate-float" /> {/* Unión gancho */}
+
+                    {/* Vigas verticales del edificio (Apoyadas en el piso, Altura total al piso = 190) */}
+                    <rect x="40" y="100" width="16" height="190" fill="#3C1053" />
+                    <rect x="110" y="100" width="16" height="190" fill="#3C1053" />
+                    <rect x="180" y="100" width="16" height="190" fill="#3C1053" />
+                    <rect x="250" y="100" width="16" height="190" fill="#3C1053" />
+
+                    {/* Losas horizontales */}
+                    <rect x="30" y="140" width="246" height="12" fill="#94a3b8" />
+                    <rect x="30" y="200" width="246" height="12" fill="#94a3b8" />
+                    <rect x="30" y="260" width="246" height="12" fill="#94a3b8" />
+
+                    {/* Andamios transversales (decorativos con colores de la marca) */}
+                    <line x1="56" y1="152" x2="110" y2="200" stroke="#c026d3" strokeWidth="3" />
+                    <line x1="110" y1="152" x2="56" y2="200" stroke="#c026d3" strokeWidth="3" />
+                    
+                    <line x1="126" y1="212" x2="180" y2="260" stroke="#00E5FF" strokeWidth="3" />
+                    <line x1="180" y1="212" x2="126" y2="260" stroke="#00E5FF" strokeWidth="3" />
+
+                    <line x1="196" y1="152" x2="250" y2="200" stroke="#c026d3" strokeWidth="3" />
+                    <line x1="250" y1="152" x2="196" y2="200" stroke="#c026d3" strokeWidth="3" />
+                  </g>
+
+                </svg>
+              </div>
+            </main>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
